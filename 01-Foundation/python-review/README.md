@@ -4,9 +4,9 @@ default size dai numerical memory allocation tergantung dari arsitektur sistem (
 
 Slicing np.array sama aturannya dengan python list
 Multi indexing : alih alih melakukan slicing terhadap setiap index, numpy array memungkinkan untuk multi indexing dengan menggunakan slicing memakai list of indices arr[[0, 1, -1]] yang juga menghasilkan np.array
-Ketika membuat multidimensional array, apabila terdapat 1 dimensi yang mismatch, maka akan disimpan sebagai tipe data object (dtype.('O')), untuk dimensi yang bermaslah sampai ke turunannya. Misalkan pada array 3 dimensi yang harusnya berukuran (2, 2, 3), apabila salah satu data hanya memiliki 1 rows, maka shape array akan menjadi (2,)
+Ketika membuat multidimensional array, apabila terdapat 1 dimensi yang mismatch, maka akan disimpan sebagai tipe data object (dtype.('O')), untuk dimensi yang bermaslah sampai ke turunannya. Misalkan pada array 3 dimensi yang harusnya berukuran (2, 2, 3), apabila salah satu data hanya memiliki 1 rows, maka shape array akan menjadi (2,) <- deprecated, soalnya kalo dilakuin sekarang bakal error
 Multidimensional slicing -> arr[d1, d2, d3, ..., dn]
 assigning value pada np.array dengan slicing akan merubah semua elemen turunannya jika dilakukan pada dimensi yang lebih tinggi -> untuk A1 yang 2-d, jika A[0] akan merubah isi A[0, 0-n]
-axis=0 orientasinya row (left right), axis=1 orientasinya column (top down)
+axis=0 orientasinya vertikal (top bottom), axis=1 orientasinya horizontal (left right)
 
 Apa sih broadcasting dan vecorized operation? Vektor ya?
