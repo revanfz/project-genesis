@@ -30,16 +30,19 @@ Index dari series dapat diganti menjadi value lain / label, ["label"], kalau tet
 Range indexing pada pandas tetap memasukkan upper limit -> [1:3] = 1, 2, 3
 Boolean operator disini akan menghasilkan boolean series
 
+konversi tipe data pada series dapat dilakukan dengan membuat ulang series baru dengan tipe data yang berbeda.
+sorting -> `series.sort_values()`
+
 DataFrame merupakan kumpulan data / Series dalam format tabel
+Dalam membuat dataframe ada 3 komponen esensial, data, index, dan columns
 `.info()` -> stuktur dataframe
 `.describe()` -> statistik summary dari dataframe
 
 `.loc` indexing menggunakan labeled index, sedangkan `.iloc` indexing dengan posisi
-`.loc` include upper limit dari indexing, sedangkan `.iloc` tidak
 hasil dari pengindeksan dataframe adalah series
 dataframe juga support multiindexing `df[['idx1', 'idx2'], ['col1', 'col2']]`
 drop row dari dataframe `.drop(['index'])`
-drop column dataframe `.drop(columns=['col1'])`
+drop column dataframe `.drop(columns=['col1'])` atau `.drop(['colName'], axis=1)`
 kolom baru `pd.Series([], index=['target'], name='colBaru')`
 ganti nilai kolom dapat menggunakan =
 kolom baru dari hasil operasi kolom lain dapat menggunakan `df['newCol'] = df['oldCol1'] / df['oldCol2']`
@@ -47,6 +50,7 @@ secara default baris pertama csv dianggap sebagai header, sehingga untuk menghil
 list kolom dari df dapat dilihat dengan .columns
 konversi string ke tanggal dengan pandas -> `pd.to_datetime()`
 preview data make `.head()` -> teratas, `.tail()` -> terbawah, default 5 data
+`.to_frame()` -> menjadikan output series jadi format yang lebih bagus secara visual
 
 `.set_index()` dapat digunakan untuk mengganti index dari dataframe ke salah satu kolom
 header, names, index_col, parse_dates -> merupakan parameter yang dapat diteruskan ke fungsi `.read_csv()`
