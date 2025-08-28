@@ -10,7 +10,7 @@ assigning value pada np.array dengan slicing akan merubah semua elemen turunanny
 ```axis=0``` orientasinya vertikal (top bottom), ```axis=1``` orientasinya horizontal (left right)  
 penggunaan parameter ```size=``` akan menghasilkan nilai dalam bentuk array  
 penggunaan memory sebuah array NumPy dapat dihitung menggunakan ```arr.size * array.itemsize``` (byte)  
-`[::n]` n-step indexing, mulai dari 0 kalau tidak ada angka sebelum colon pertama  
+`[::n]` n-step indexing, mulai dari 0 kalau tidak ada angka sebelum colon pertama  K
 default: `.any()` -> True jika ada yang falsy, `.all()` -> False jika ada yang falsy  
 
 ### Apa sih broadcasting dan vecorized operation? Vektor ya?  
