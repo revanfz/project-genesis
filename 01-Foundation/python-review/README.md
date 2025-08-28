@@ -88,7 +88,7 @@ contohnya seperti umur pelanggan yang bernilai lebih dari 150 atau sesuatu yang 
 
 fungsi `.unique()` menghasilkan list nilai unik suatu series atau dataframe  
 sedangkan `.value_counts()` menghasilkan list nilai unik suatu series atau dataframe yang disertai jumlah kemunculan masing-masing nilai tersebut  
-fungsi `.replace()` digunakan untuk mengubah nama index dan nama kolom dengan format key-pair `{oldName: newName}`
+fungsi `.replace()` digunakan untuk mengubah nama index atau nama kolom dengan format key-pair `{oldName: newName}`
 `.duplicated()` adalah fungsi pengecekan data duplikat. secara default bersifat top down checking, dengan parameter `keep=last` berubah menjadi bottom up, sedangkan dengan `keep=false` akan menganggap semua data yang sama duplikat (all duplicate), parameter `subset` menspesifikasikan kolom mana yang mau dicari duplikatnya
 fungsi `.drop_duplicates()` digunakan untuk menghapus data duplikat, parameternya sama kaya `.duplicated()` yaitu `keep` dan `subset`
 Data dengan tipe object string memiliki .str property sehingga memungkinkan operasi seperti `.contains()`, `.split()` -> `df['colName'].str.split('-', expand=True)`
