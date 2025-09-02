@@ -1,4 +1,4 @@
-# Catatan Belajar Numpy
+# NumPy
 Numpy memungkinkan pengembang untuk mengalokasikan memori lebih optimal dengan membuat tipe sebuah data lebih spesifik penggunaan ukuran memorinya, int8, int16, float32, dll.  
 default size dai numerical memory allocation tergantung dari arsitektur sistem (32bit / 64bit)  
 
@@ -9,19 +9,60 @@ Multidimensional slicing -> ```arr[d1, d2, d3, ..., dn]```
 assigning value pada np.array dengan slicing akan merubah semua elemen turunannya jika dilakukan pada dimensi yang lebih tinggi -> untuk A1 yang 2-d, jika A[0] akan merubah isi A[0, 0-n]  
 ```axis=0``` orientasinya vertikal (top bottom), ```axis=1``` orientasinya horizontal (left right)  
 penggunaan parameter ```size=``` akan menghasilkan nilai dalam bentuk array  
-penggunaan memory sebuah array NumPy dapat dihitung menggunakan ```arr.size * array.itemsize``` (byte)  
+penggunaan memory sebuah array NumPy dapat dihitung menggunakan ```arr.size * array.itemsize``` (byte) dapat juga dengan `np.nbytes()`
 `[::n]` n-step indexing, mulai dari 0 kalau tidak ada angka sebelum colon pertama  K
 default: `.any()` -> True jika ada yang falsy, `.all()` -> False jika ada yang falsy  
 
 ### Apa sih broadcasting dan vecorized operation? Vektor ya?  
 Sangat tekait dengan boolean operation, vectorized operation adalah operasi yang diterapkan pada setiap elemen array  
-Sedangkan broadcasting adalah kemampuan numpy adalam melakukan vectorized operation pada array yang memiliki dimensi yang berbeda   
+Sedangkan broadcasting adalah kemampuan numpy adalam melakukan vectorized operation pada array yang memiliki dimensi yang berbeda 
+array yang kompatibel untuk dilakukan broadcastin memiliki aturan berikut: jika sebuah dimensi berukuran = 1, maka dapat di broadcast ke dimensi dengan ukuran berapapun
+sedangkan untuk dimensi yang bernilai `n` hanya dapat di broadcast ke dimensi yang berukuran 1 atau dimensi yang sama
+advanced indexing [[a, b]], [:, [a, b]], [[a1, b2], [a2, b2]], intinya indexing numpy itu bermulai dari list of row, dan list of column [[row, row, row], [col, col, col]]
+mengurut elemen dapat menggunakan fungsi `.sort()`, secara default dilakukan secara horizontal (axis=1)
+fungsi `.flatten()` megubah array menjadi bentuk 1 dimensi
+fungsi `.argmax()` mengembalikan indeks elemen yang memiliki nilai tertinggi
+fungsi `.argmin()` mengembalikan indeks elemen yang memiliki nilai terendah 
+fungsi `.nonzero()` mengembalikan indeks yang nilai elemennya bukan nol
+fungsi `np.where(condition, arr, expr for met condition)` digunakan untuk mengembalikan array baru yang berisikan nila
+fungsi `np.nditer(a, order)` digunakan untuk iterasi elemen array, order dapat bernilai 'C' yang merupakan C-style atau row major, f col major
+np.newaxis nambah dimensi baru  
 Comparison operator akan menghasilkan boolean array (masks) sehingga dapat digunakan untuk multiindexing -> arr[arr >= 2]  
 operator yang mendukung multiindexing di numpy yaitu tilde ```~``` (not), bar or (`|`), ampersand and (`&`) -> `arr[(a >= 2) & (a % 2 == 0) | (a < 10) & (a > 3)]`  
 ```sys.gesizeof(x)``` -> mengembalikan jumlah byte yang dibutuhkan sebuah variabel  
 ```np.dtype(type).itemsize``` -> sama, tapi dengan numpy  
 
-# Catatan Belajar Pandas
+cara alternatif untuk masking np.array yaitu menggunakan `numpy.ma.masked_array(arr, mask)`, parameter mask berupa boolean array yang nilai 0 berarti jangan mask elemen tersebut, sedangkan 1 mask elemen tsb
+fungsi `ma.getmask()` mengembalikan nilai masked yang dibuat dengan `ma.masked_array()` atau `ma.nomask` kalau tidak ada mask nya
+fungsi `.masked_greater()` untuk masking elemen yang lebih besar dari suatu nilai
+fungsi `.masked_inside(arr, v1, v2)` untuk masking elemen yang v1 < value > v2, berada diantara 2 nilai
+sedangkan fungsi `.masked_outside(arr, v1, v2)` untuk membuat masking elemen yang < v1 dan > v2, bukan dalam rentang v1 - v2
+fungsi `.masked_where(condition, arr)` melakukan masking pada elemen yang memnuhi suatu kondisi
+fungsi `.masked_invalid(arr)` melakukan masking pada elemen yang memiliki nilai tidak valid (NaNs atau Inf)
+
+NumPy melakukan operasi view pada indexing, yaitu viewpoint yang berbeda dari suatu data (merujuk pada alamat memory yang sama)
+sedangkan untuk melakukan penyalinan, gunakan fungsi `.copy()` untuk membuat array baru pada alamet memori yang berbeda
+array hasil view memiliki `.base`, sedangkan hasil `copy` tidak
+agar suatu fungsi dapat mengolah np.array, vektorisasi fungsi tersebut menggunakan `np.vectorized()`, contoh:
+```
+import numpy as np
+def odd_even(x):
+    if x % 2 == 0:
+        return x ** 2
+    else:
+        return x
+
+vectorized_odd_even = np.vectorized(odd_even)
+print(vectorized_odd_even(np.arr[1, 2, 3]))
+```
+
+fungsi `.matmul(arr1, arr2)` digunakan untuk perkalian (matrix multiplication), memiliki shorthand operator yang disimbolkan dengan at (@) -> arr1 @ arr2
+property `.byteorder`, = : native, > big endian (most significant byte), < little endian (Least Significant Byte) <!-- TODO -->
+tipe data bawaan dari string pada np.array mengikuti jumlah karakter terpanjang dari elemen array, jika dispesifikan menjadi panjang tertentu, maka elemen yang karakternya lebih dari nilai tersebut akan dipotong
+cara deklarasi custom datatype pada numpy `dt = np.dtype('i4, (2, 3)f8, f4')` -> datatype yang dihaisilkan adalah `(integer 4 byte (32bit), float 8byte (64bit) with the size of 2x3 (array), and float 4 byte (32bit))`
+
+
+# Pandas
 ### Apasih Pandas? Apa juga sih Series?
 Tipe data pandas terdiri dari Series dan DataFrame  
 Series adalah serangkaian data terindeks yang disimpan dengan tipe data tertentu  
