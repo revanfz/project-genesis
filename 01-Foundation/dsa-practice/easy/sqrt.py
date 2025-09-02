@@ -8,4 +8,17 @@ def sqrt(x):
         xn = res
     return int(xn)
 
-print(sqrt(2147395599))    
+    # Karena problemnya cuma pengen int terdekat kebawah (floored)
+    # ini pendekatan yang lebih simpel, tapi ini runtimenya lebih lama sih
+    # if x < 1:
+    #     return x
+    
+    # res = 1
+    # i = 1
+    # while res <= x:
+    #     i += 1
+    #     res = i * i
+
+    # return i - 1
+
+print(sqrt(4))    
